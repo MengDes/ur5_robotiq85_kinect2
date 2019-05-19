@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+<!-- start the robot -->
+    <include file="$(find ur_modern_driver)/launch/ur5_bringup.launch">
+        <arg name="robot_ip" value="192.168.1.102" />
+        <arg name="limited" value="true" />
+    </include>
+
+<!-- start the gripper -->
+    <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch" />
+
+<!-- start the move_group -->
+    <include file="$(find ur5_robotiq_moveit_config)/launch/move_group.launch" />
+
+<!-- start the camera -->
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="align_depth" value="true" />
+    </include>
+
+</launch>

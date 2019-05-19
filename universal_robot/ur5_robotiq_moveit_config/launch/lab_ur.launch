@@ -1,0 +1,26 @@
+<launch>
+    <arg name="robot_ip" doc="The IP address of the UR5 robot" />
+
+    <!-- start the Kinect -->
+    <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" >
+       <!-- <arg name="depth_registration" value="true" />-->
+       <arg name="publish_tf" value="true" />
+    </include>
+
+    <!-- start the gripper -->
+    <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch"/>
+
+    <!-- start the robot -->
+    <include file="$(find ur_modern_driver)/launch/ur5_bringup.launch">
+        <arg name="limited" value="false" />
+        <arg name="robot_ip" value="192.168.1.1" />
+    </include>
+    <include file="$(find ur5_robotiq_moveit_config)/launch/move_group.launch">
+        <!--arg name="limited" value="true" /-->
+    </include>
+
+
+    <!-- publish transform -->
+    <node name="handeye" pkg="tf" type="static_transform_publisher" args="0.7994315259715132 0.6519674743176637 0.38345522756668843 -0.5664308263476697 -0.594748776025702 0.39878168431623273 0.40792545965278265 base_link kinect2_rgb_optical_frame 100"/>
+
+</launch>
