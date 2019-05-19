@@ -13,6 +13,8 @@ https://github.com/OpenKinect/libfreenect2
 
 https://github.com/code-iai/iai_kinect2
 
+make sure connect with robot ,gripper and camera
+
 ## usage:
 
     roslaunch ur5_robotiq_moveit_config lab_ur.launch
